@@ -19,8 +19,7 @@ public class AdHocReportControllerTests
     [Test]
     public void GenerateAndExportPdf_RequiresMockingEntireFatInterface()
     {
-        // ❌ We must create a substitute for ALL 6 methods, even though
-        // AdHocReportController only uses 2 (Generate + ExportToPdf)
+
         var fatService = Substitute.For<IReportService>();
 
         var report = new Report { Title = "Sales Q4", Content = "data" };
@@ -37,7 +36,6 @@ public class AdHocReportControllerTests
         //
         // Yet if any of them change signature, this test file must recompile!
         // And if someone adds a 7th method, ALL consumers must be updated.
-
         var controller = new AdHocReportController(fatService);
         var request = new ReportRequest { Title = "Sales Q4", Type = ReportType.Sales };
 

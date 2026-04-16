@@ -34,13 +34,13 @@ public class AdHocReportControllerTests
     [Test]
     public void GenerateAndExportPdf_CallsGeneratorWithRequest()
     {
+        var request = new ReportRequest { Title = "Sales Q4", Type = ReportType.Sales };
         // TODO: Arrange — create a ReportRequest
         //       Set up _generator.Generate(request).Returns(new Report { ... })
         //       Set up _exporter.Export(...).Returns(new byte[] { 1, 2, 3 })
-        // TODO: Act — call _sut.GenerateAndExportPdf(request)
-        // TODO: Assert — _generator.Received(1).Generate(request)
+        _sut.GenerateAndExportPdf(request);
+        _generator.Received(1).Generate(request);
 
-        throw new NotImplementedException("Implement this test");
     }
 
     [Test]
@@ -60,12 +60,12 @@ public class AdHocReportControllerTests
     [Test]
     public void GenerateAndExportPdf_ReturnsExportedBytes()
     {
-        // TODO: Arrange — set up generator and exporter
-        //       var expectedBytes = new byte[] { 0x25, 0x50, 0x44, 0x46 }; // PDF magic bytes
-        //       _exporter.Export(Arg.Any<Report>(), ExportFormat.Pdf).Returns(expectedBytes)
-        // TODO: Act — call _sut.GenerateAndExportPdf(request)
-        // TODO: Assert — result == expectedBytes
+        var request = new ReportRequest { Title = "Sales Q4", Type = ReportType.Sales };
+        var expectedBytes = new byte[] { 0x25, 0x50, 0x44, 0x46 }; // PDF magic bytes
 
-        throw new NotImplementedException("Implement this test");
+        // TODO: Arrange — set up generator and exporter
+        //       _exporter.Export(Arg.Any<Report>(), ExportFormat.Pdf).Returns(expectedBytes)
+        var result = _sut.GenerateAndExportPdf(request);
+        Assert.AreEqual(expectedBytes, result);
     }
 }

@@ -1,4 +1,5 @@
 using SolidTraining.Common.Models;
+using System.Reflection.Emit;
 
 namespace SolidTraining.ISP.Bad;
 
@@ -21,8 +22,12 @@ public class AdHocReportController
 
     public byte[] GenerateAndExportPdf(ReportRequest request)
     {
-        // Only uses 2 out of 6 methods on IReportService
         var report = _reportService.Generate(request);
-        return _reportService.ExportToPdf(report);
+        if (report is null) throw new NullReferenceException("generated report is null");
+        var pdfBytes = _reportService.ExportToPdf(report);
+        if (pdfBytes.Length == 0)
+            throw new Exception("exported report is empty");
+
+        return pdfBytes;
     }
 }

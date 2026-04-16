@@ -35,12 +35,12 @@ public class AdHocReportController
 
     public byte[] GenerateAndExportPdf(ReportRequest request)
     {
-        // TODO: Step 1 — Generate the report using _generator.Generate(request)
+        var report = _generator.Generate(request);
+        if (report is null) throw new NullReferenceException("generated report is null");
+        var pdfBytes = _exporter.Export(report, ExportFormat.Pdf);
+        if (pdfBytes.Length == 0)
+            throw new Exception("exported report is empty");
 
-        // TODO: Step 2 — Export to PDF using _exporter.Export(report, ExportFormat.Pdf)
-
-        // TODO: Step 3 — Return the exported bytes
-
-        throw new NotImplementedException("Implement report generation and PDF export");
+        return pdfBytes;
     }
 }

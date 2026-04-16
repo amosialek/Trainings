@@ -53,3 +53,4 @@ CodeCoverage/
 TestResult.xml
 nunit-*.xml
 /competitive_tests_writing/.vs/competitive_tests_writing
+/SolidTraining/.vs/SolidTraining
